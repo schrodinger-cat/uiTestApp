@@ -1,3 +1,8 @@
+/**
+ * Используя парсер сделаю из нужных элементов (в данном случае у всех, у которых есть data-аттрибут data-mt-widget)
+ * массив из объектов с настройками
+ * @param {*} html - исходный html
+ */
 export function parseHtml(html) {
   const parser = new DOMParser();
   const dom = parser.parseFromString(html, 'text/html');

@@ -11,6 +11,9 @@ export default new Vuex.Store({
     getWidgetsList: state => state.widgets,
   },
   mutations: {
+    /**
+     * Мутация для добавления в стор массива объектов с виджетами
+     */
     setWidgetsList: (state, payload) => {
       state.widgets = payload;
     }

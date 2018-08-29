@@ -73,9 +73,5 @@ export default {
       widgetsList: 'getWidgetsList',
     }),
   },
-
-  beforeMount() {
-
-  }
 };
 </script>
