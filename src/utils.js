@@ -9,6 +9,7 @@ export function parseHtml(html) {
     let options = {
       config: null,
       mtWidget: true,
+      type: elem.className
     };
 
     options.config = JSON.parse(elem.dataset.config);

@@ -6,7 +6,7 @@ import { parseHtml } from './utils';
 
 Vue.config.productionTip = false;
 
-parseHtml(html);
+store.commit('setWidgetsList', parseHtml(html));
 
 new Vue({
   store,

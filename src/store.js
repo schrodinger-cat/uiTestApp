@@ -4,7 +4,16 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    widgets: null,
+  },
+  getters: {
+    getWidgetsList: state => state.widgets,
+  },
+  mutations: {
+    setWidgetsList: (state, payload) => {
+      state.widgets = payload;
+    }
+  },
   actions: {}
 });
