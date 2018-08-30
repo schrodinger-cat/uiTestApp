@@ -4,7 +4,10 @@
       <!-- mt-textarea -->
       <template v-if="widget.type == 'mt-textarea'">
         <label :for="`id_${widget.config.id}`" class="mt-label">
-          {{ widget.config.placeholder }}
+          {{ widget.config.placeholder }} 
+          <sup class="mt-required" v-if="widget.config.required">
+            *
+          </sup>
         </label>
 
         <textarea 
@@ -19,7 +22,10 @@
       <!-- mt-textinput -->
       <template v-if="widget.type == 'mt-textinput'">
         <label :for="`id_${widget.config.id}`" class="mt-label">
-          {{ widget.config.placeholder }}
+          {{ widget.config.placeholder }} 
+          <sup class="mt-required" v-if="widget.config.required">
+            *
+          </sup>
         </label>
 
         <input 
@@ -37,7 +43,10 @@
       <template v-if="widget.type == 'mt-checkbox'">
         <label :key="widget.config.id">
           <input type="checkbox" :checked="widget.config.checked">
-          {{ widget.config.value }}
+          {{ widget.config.value }} 
+          <sup class="mt-required" v-if="widget.config.required">
+            *
+          </sup>
         </label>
       </template>
 
@@ -45,11 +54,20 @@
       <template v-if="widget.type == 'mt-dropdown'">
         <div :key="widget.config.id">
           <label :for="`id_checkbox_${widget.config.id}`" class="mt-label">
-            {{ widget.config.placeholder }}
+            {{ widget.config.placeholder }} 
+            <sup class="mt-required" v-if="widget.config.required">
+              *
+            </sup>
           </label>
 
           <select :id="`id_checkbox_${widget.config.id}`" class="mt-select">
             <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
             <option 
               v-for="(item, index) in widget.config.items"
               :key="index"
@@ -132,6 +150,10 @@ export default {
 
   .mt-select {
     height: 35px;
+  }
+
+  .mt-required {
+    color: red
   }
 </style>
 
