@@ -61,6 +61,7 @@
           </label>
 
           <select :id="`id_checkbox_${widget.config.id}`" class="mt-select">
+            <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -87,7 +88,8 @@
       </template>
     </div>
 
-    <button>Отправить</button>
+    Данные для отправки:
+    <pre class="output">{{ widgetsList }}</pre>
   </div>
 </template>
 
@@ -154,6 +156,12 @@ export default {
 
   .mt-required {
     color: red
+  }
+
+  .output {
+    padding: 20px;
+    background-color: #dadada;
+    border-radius: 5px;
   }
 </style>
 
