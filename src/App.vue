@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="mt">
-    <div v-for="widget in widgetsList" class="mt-elem" :key="widget.config.id">
+    <div v-for="(widget, index) in widgetsList" class="mt-elem" :key="widget.config.id">
       <!-- mt-textarea -->
       <template v-if="widget.type == 'mt-textarea'">
         <label :for="`id_${widget.config.id}`" class="mt-label">
@@ -16,6 +16,7 @@
           :placeholder="widget.config.placeholder"
           :required="widget.config.required"
           :rows="widget.config.rows"
+          v-model="form[index].config.value"
         ></textarea>
       </template>
 
@@ -34,16 +35,20 @@
           :id="`id_${widget.config.id}`"
           :placeholder="widget.config.placeholder"
           :required="widget.config.required"
-          :value="widget.config.value"
           :key="widget.config.id"
+          v-model="form[index].config.value"
         >
       </template>
 
       <!-- mt-checkbox -->
       <template v-if="widget.type == 'mt-checkbox'">
         <label :key="widget.config.id">
-          <input type="checkbox" :checked="widget.config.checked">
-          {{ widget.config.value }} 
+          <input 
+            type="checkbox" 
+            :checked="widget.config.checked"
+            v-model="form[index].config.value"
+          >
+          {{ widget.config.placeholder }} 
           <sup class="mt-required" v-if="widget.config.required">
             *
           </sup>
@@ -60,7 +65,11 @@
             </sup>
           </label>
 
-          <select :id="`id_checkbox_${widget.config.id}`" class="mt-select">
+          <select 
+            :id="`id_checkbox_${widget.config.id}`" 
+            class="mt-select"
+            v-model="form[index].config.value"
+          >
             <option value="0">0</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -89,7 +98,7 @@
     </div>
 
     Данные для отправки:
-    <pre class="output">{{ widgetsList }}</pre>
+    <pre class="output">{{ form }}</pre>
   </div>
 </template>
 
@@ -102,7 +111,7 @@ export default {
   data: () => {
     return {
       form: [],
-    }
+    };
   },
 
   computed: {
@@ -110,59 +119,65 @@ export default {
       widgetsList: 'getWidgetsList',
     }),
   },
+
+  beforeMount() {
+    this.form = this.widgetsList;
+  },
 };
 </script>
 
 
 <style scoped>
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    font-size: 14px;
-  }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  font-size: 14px;
+}
 
-  .mt {
-    width: 900px;
-    margin: auto;
-    padding: 40px;
-  }
+.mt {
+  width: 900px;
+  margin: auto;
+  padding: 40px;
+}
 
-  .mt-elem {
-    margin-bottom: 20px;
-  }
+.mt-elem {
+  margin-bottom: 20px;
+}
 
-  .mt-label {
-    display: block;
-    margin-bottom: 10px;
-  }
+.mt-label {
+  display: block;
+  margin-bottom: 10px;
+}
 
-  .mt-textarea, .mt-textinput, .mt-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #2c3e50;
-    outline: none;
-    border-radius: 5px;
-  }
+.mt-textarea,
+.mt-textinput,
+.mt-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #2c3e50;
+  outline: none;
+  border-radius: 5px;
+}
 
-  .mt-select {
-    height: 35px;
-  }
+.mt-select {
+  height: 35px;
+}
 
-  .mt-required {
-    color: red
-  }
+.mt-required {
+  color: red;
+}
 
-  .output {
-    padding: 20px;
-    background-color: #dadada;
-    border-radius: 5px;
-  }
+.output {
+  padding: 20px;
+  background-color: #dadada;
+  border-radius: 5px;
+}
 </style>
 
 
