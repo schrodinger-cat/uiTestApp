@@ -44,11 +44,10 @@
       <template v-if="widget.type == 'mt-checkbox'">
         <label :key="widget.config.id">
           <input 
-            type="checkbox" 
-            :checked="widget.config.checked"
-            v-model="form[index].config.value"
+            type="checkbox"
+            v-model="form[index].config.checked"
           >
-          {{ widget.config.placeholder }} 
+          {{ widget.config.value }} 
           <sup class="mt-required" v-if="widget.config.required">
             *
           </sup>
@@ -70,20 +69,12 @@
             class="mt-select"
             v-model="form[index].config.value"
           >
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
             <option 
               v-for="(item, index) in widget.config.items"
               :key="index"
-              :value="item.value"
+              :value="item"
             >
-              {{ item.name }}
+              {{ item }}
             </option>
           </select>
         </div>
