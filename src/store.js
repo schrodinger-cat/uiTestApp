@@ -26,6 +26,14 @@ export default new Vuex.Store({
     setWidgetsValuesList: (state, payload) => {
       state.widgetValues = payload;
     },
+
+    /**
+     * Мутация для двунаправленного связывания значения виджета со стором
+     * @param {*} payload - объект {id: .., value: ..}
+     */
+    updateWidgetValue: (state, payload) => {
+      state.widgetValues[payload.id] = payload.value;
+    }
   },
   actions: {},
 });
