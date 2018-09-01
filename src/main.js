@@ -14,8 +14,6 @@ Vue.config.productionTip = false;
 store.commit('setWidgetsList', parseHtml(html));
 store.commit('setWidgetsValuesList', valuesList(html));
 
-console.log(valuesList(html));
-
 new Vue({
   store,
   render: h => h(App),
