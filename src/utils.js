@@ -7,33 +7,13 @@ export function parseHtml(html) {
   const parser = new DOMParser();
   const dom = parser.parseFromString(html, 'text/html');
 
-  let widgets = [];
-  let containers = dom.querySelectorAll('[data-mt-widget]');
-
-  containers.forEach(elem => {
-    widgets.push(createNode(elem));
-  });
-
-  let tree = convertHtmlToJson(dom);
-  console.log(normalizeTree(tree));
-
-  return widgets;
+  return convertHtmlToJson(dom);
 }
 
-function createNode(elem) {
-  let options = {
-    config: null,
-    mtWidget: true,
-    type: elem.className,
-    children: [],
-  };
-
-  options.config = JSON.parse(elem.dataset.config);
-  options.mtWidget = elem.dataset.mtWidget;
-
-  return options;
-}
-
+/**
+ * Рекурсивно создадим массив со всеми узлами из исходного html
+ * @param {*} html -  строка с html
+ */
 function convertHtmlToJson(html) {
   let dom = html.querySelectorAll('body');
   let tree = [];
@@ -80,16 +60,24 @@ function convertHtmlToJson(html) {
   return tree;
 }
 
-function normalizeTree(node) {
-  node.forEach((element, key) => {
-    if(!element.mtWidget) {
-      if(element.children.length == 0) {
-        delete node[key];
-      }
+/**
+ * Соберем объект из значений виджетов, для последующего связывания. Ключ - id виджета
+ * @param {*} html - исходный html
+ */
+export function valuesList(html) {
+  const parser = new DOMParser();
+  const dom = parser.parseFromString(html, 'text/html');
+  const list = {};
+
+  let widgetContainer = dom.querySelectorAll('[data-mt-widget]');
+
+  widgetContainer.forEach(elem => {
+    let config = JSON.parse(elem.dataset.config);
+
+    if(elem.className != 'mt-container') {
+      list[config.id] = elem.className == 'mt-checkbox' ? config.checked : config.value;
     }
+  });
 
-    normalizeTree(element.children);
-  })
-
-  return node
+  return list;
 }

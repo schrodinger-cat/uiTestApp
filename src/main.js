@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import store from './store';
 import html from 'data.html';
-import { parseHtml } from './utils';
+import { parseHtml, valuesList } from './utils';
 
 Vue.config.productionTip = false;
 
@@ -12,6 +12,9 @@ Vue.config.productionTip = false;
  * используя DOMParser - распаршу его и запишу полученный результат в стор
  */
 store.commit('setWidgetsList', parseHtml(html));
+store.commit('setWidgetsValuesList', valuesList(html));
+
+console.log(valuesList(html));
 
 new Vue({
   store,
