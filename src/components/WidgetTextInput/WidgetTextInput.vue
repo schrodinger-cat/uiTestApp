@@ -36,7 +36,7 @@ export default {
           id: this.widget.id,
           value: value,
         };
-        
+
         this.handleUpdateValue(params);
       },
     },
@@ -44,8 +44,8 @@ export default {
 
   methods: {
     ...mapMutations({
-      handleUpdateValue: 'updateWidgetValue'
-    })
+      handleUpdateValue: 'updateWidgetValue',
+    }),
   },
 };
 </script>

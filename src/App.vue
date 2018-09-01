@@ -6,13 +6,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Widgets from './components/Widgets/Widgets.vue'
+import Widgets from './components/Widgets/Widgets.vue';
 
 export default {
   name: 'app',
 
   components: {
-    Widgets
+    Widgets,
   },
 
   data: () => {
@@ -33,7 +33,8 @@ export default {
 
   mounted() {
     //console.log(this.$el.outerHTML);
-  }
+    console.log(this.$options);
+  },
 };
 </script>
 
@@ -51,7 +52,6 @@ export default {
   font-size: 14px;
 }
 
-
 .mt {
   width: 900px;
   margin: auto;
@@ -64,5 +64,3 @@ export default {
   border-radius: 5px;
 }
 </style>
-
-

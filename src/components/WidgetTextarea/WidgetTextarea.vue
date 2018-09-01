@@ -7,7 +7,6 @@
       </sup>
     </label>
 
-    <!-- v-model="form[index].value" -->
     <textarea 
       class="mt-textarea"
       :id="`id_${widget.id}`"

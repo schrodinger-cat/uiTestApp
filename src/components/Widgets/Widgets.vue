@@ -1,24 +1,17 @@
 <template>
   <div>
     <div v-for="(widget, index) in list" class="mt-elem" :key="index">
-      <!-- mt-textarea -->
       <widget-textarea :widget="widget.config" v-if="widget.type == 'mt-textarea'"></widget-textarea>
-
-      <!-- mt-textinput -->
       <widget-text-input :widget="widget.config" v-if="widget.type == 'mt-textinput'"></widget-text-input>
-
-      <!-- mt-checkbox -->
       <widget-checkbox :widget="widget.config" v-if="widget.type == 'mt-checkbox'"></widget-checkbox>
-
-      <!-- mt-dropdown -->
       <widget-dropdown :widget="widget.config" v-if="widget.type == 'mt-dropdown'"></widget-dropdown>
 
-      <!-- mt-container -->
       <template v-if="widget.type == 'mt-container'">
         <div :class="widget.type" :key="widget.config.id">
-          {{ widget.config.placeholder }}
-
-          <widgets :list="widget.children" v-if="widget.children.length"></widgets>
+          <div class="mt-title">{{ widget.config.placeholder }}</div>          
+          <div class="mt-content">
+            <widgets :list="widget.children" v-if="widget.children.length"></widgets>
+          </div>
         </div>
       </template>
 
@@ -68,8 +61,22 @@ export default {
 }
 
 .mt-container {
-  background-color: #dadada;
+  border: 1px solid #2c3e50;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.mt-title {
+  padding: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: #fff;
+  border-bottom: 1px solid #2c3e50;
+}
+
+.mt-content {
   padding: 20px;
+  background-color: #dadada;
 }
 
 .mt-select {

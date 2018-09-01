@@ -45,6 +45,10 @@ export default {
         this.handleUpdateValue(params);
       },
     },
+
+    getInitialValue() {
+      return this.$store.state.widgetValues[this.widget.id];
+    }
   },
 
   methods: {
