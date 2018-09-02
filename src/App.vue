@@ -1,6 +1,9 @@
 <template>
   <div id="app" class="mt">
     <widgets :list="widgetsList"></widgets>
+
+    <button @click.prevent="generateHTML">Сгенерировать html</button>
+    <pre class="mt-html">{{ form }}</pre>
   </div>
 </template>
 
@@ -11,29 +14,27 @@ import Widgets from './components/Widgets/Widgets.vue';
 export default {
   name: 'app',
 
-  components: {
-    Widgets,
-  },
-
   data: () => {
     return {
-      form: [],
-    };
+      form: null
+    }
+  },
+
+  components: {
+    Widgets,
   },
 
   computed: {
     ...mapGetters({
       widgetsList: 'getWidgetsList',
+      widgetsValues: 'getWidgetsValues'
     }),
   },
 
-  beforeMount() {
-    this.form = this.widgetsList;
-  },
-
-  mounted() {
-    //console.log(this.$el.outerHTML);
-    console.log(this.$options);
+  methods: {
+    generateHTML() {
+      this.form = this.$el.outerHTML;
+    }
   },
 };
 </script>
@@ -56,6 +57,15 @@ export default {
   width: 900px;
   margin: auto;
   padding: 40px;
+}
+
+.mt-html {
+  overflow-x: scroll;
+  font-size: 10px;
+  background-color: #e0e0e0;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
 }
 
 .output {

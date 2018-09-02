@@ -32,6 +32,15 @@ function convertHtmlToJson(html) {
         options.type = node.className;
         options.config = JSON.parse(node.dataset.config);
 
+        try {
+          if(options.type == 'mt-dropdown' && !options.config.items) {
+            throw new Error('У селекта должны быть элементы')
+          }
+        } 
+        catch(e) {
+          console.error(e);
+        }
+
         if (node.className == 'mt-container' && node.children.length) {
           let c = Array.from(node.children);
 

@@ -33,7 +33,7 @@ export default {
     WidgetTextarea,
     WidgetTextInput,
     WidgetCheckbox,
-    WidgetDropdown
+    WidgetDropdown,
   },
 
   props: ['list'],
